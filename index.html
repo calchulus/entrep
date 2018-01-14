@@ -9,11 +9,9 @@
     
  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css'>
     
-<!--
      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/search.min.css'>
     
      <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/search.css'>
--->
     
       
      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/transition.css'>  
@@ -51,31 +49,39 @@
 </head>
 
 <body>
-    
-    
+
 	<div style="font-family: 'Quicksand', sans-serif">
   <div class="row">
+  <form id="resourceformTip" name="resourceformTip" action="" method="post">
+  <div class="row">
+    <div class="small-6 columns">
         
- 
-            <div class="small-6 columns">
-                   <br>
+       
 <!--
-        <div class="ui fluid search column">
-  <div class="ui fluid icon input">
-      
-   
-    <input id="search" class="prompt" type="text" placeholder="Search animals...">
-    <i class="search icon"></i>
-  </div>
-   
-              
-  <div class="results"></div>
-</div>        
+        <div class="ui red horizontal label">Fruit</div> 
+     <select name="test" id="mySelect" onchange="myFunction()">
+<option value="one">1</option>
+<option value="two">2</option>
+<option value="three">3</option>
+</select>
 -->
-                         
-      <h2>Crypto Resources</h2>
-        
+
+<!--<p id="demo"></p>-->
+
 <!--
+<script>
+function myFunction() {
+    var x = document.getElementById("mySelect").value;
+    if(x == "two"){
+       document.getElementById("demo").innerHTML = "You selected: " + x;
+    }
+}
+</script>   
+        
+-->
+            <div class="small-12 columns">
+      <h2>Resources</h2>
+        
                 <div class="ui blue three item menu">
   <a class="active item">
     Home
@@ -86,53 +92,135 @@
   <a class="item">
     Friends
   </a>
-</div>            
+</div>
+                
+<!--
+ <div class="ui text menu">
+  <div class="header item">Sort By</div>
+  <a class="active item">
+    A-Z
+  </a>
+  <a class="item">
+    Most Comments
+  </a>
+  <a class="item">
+    Most Popular
+  </a>
+    <div class="right menu">
+   <div class="item">
+      <div class="ui icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+
+  </div>
+
+</div>              
 -->
-         
-    <div class="ui fluid search column" style="margin-left: -15px;">
-    <div class="ui fluid big icon input">
-<input class="prompt" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for anything..." title="Type in a name">
-                 <i class="search icon"></i>
-    </div>
-        <br>
-  </div>              
-            
-    
-     <ul id="list" class="list menu vertical" style="font-family: 'Quicksand', sans-serif !important">
+                
+      <ul class="resourceTipsList menu vertical" style="font-family: 'Quicksand', sans-serif !important">
       </ul>
-
-<script>
-function myFunction() {
-    var input, filter, ul, li, a, b, i;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("list");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("p")[0];
-        b = li[i].getElementsByTagName("p")[1];
-        c = li[i].getElementsByTagName("div")[2];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            
-            if (b.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else
-            if (c.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else
-            li[i].style.display = "none";
-
-        }
-    }
-}
-</script>
-      
-                  
-     
     </div>
 
+    </div>
+    <div class="small-5 columns">
+           <div class="ui form">  
+    <div class="row">
+        <br>
+        <select style="height: 8em" id="category" name="category" multiple="">
+<option>-- Select Category -- </option>
+      <option value="basics">Entrepreneurship Basics</option>
+      <option value="startups">Cool Startups</option>
+    <option value="crypto">Crypto Startups</option>
+    <option value="impact">Impact Orgs</option>
+    <option value="dev">Dev</option>
+      <option value="articles">Articles</option>
+      <option value="discussions">Discussions</option>
+            <option value="videos">Videos</option>
+      <option value="resources">Resources</option>
+      <option value="fun">Fun</option>
+        </select>
+      
+       <div class="row">
+  <div class="field" >
+    <label>Link</label>
+    <textarea rows="1" name="url" id="url"></textarea>
+  </div>
+        </div>
+        <div class="row">
+  <div class="field">
+    <label>Title</label>
+    <textarea rows="1" name="tip" id="tip" ></textarea>
+  </div> 
+        </div>
+          <div class="row">
+  <div class="field">
+    <label>Description</label>
+    <textarea rows="2" name="description" id="description" ></textarea>
+  </div> 
+        </div>
+        
+<!--
+        
+<div class="ui basic right labeled dropdown icon button">
+  <i class="dropdown icon"></i>
+  <span class="ui tiny header">Filter</span>
+  <div class="menu">
+    <div class="ui icon search input">
+      <i class="search icon"></i>
+      <input type="text" name="Search" placeholder="Search&hellip;">
+    </div>
+    <div class="scrolling menu">
+      <div class="ui item checkbox" data-value="item1">
+        <input type="checkbox" name="item1">
+        <label>First item</label>
+      </div>
+      <div class="ui item checkbox" data-value="item2">
+        <input type="checkbox" name="item2">
+        <label>Second item</label>
+      </div>
+      <div class="ui item checkbox" data-value="item3">
+        <input type="checkbox" name="item3">
+        <label>Third item</label>
+      </div>
+      <div class="ui item checkbox" data-value="item4">
+        <input type="checkbox" name="item4">
+        <label>Fourth item</label>
+      </div>
+      <div class="ui item checkbox" data-value="item5">
+        <input type="checkbox" name="item5">
+        <label>Fifth item</label>
+      </div>
+      <div class="ui item checkbox" data-value="item6">
+        <input type="checkbox" name="item6">
+        <label>Sixth item</label>
+      </div>
+      <div class="ui item checkbox" data-value="item7">
+        <input type="checkbox" name="item7">
+        <label>Seventh item</label>
+      </div>
+      <div class="ui item checkbox" data-value="item8">
+        <input type="checkbox" name="item8">
+        <label>Eighth item</label>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+        
+        
+    <div class="row">
+      <input id="addValue" type="submit" class="button"/>
+    </div>
+        </div>       
+        
+        
+    </div>
+  </div>
+</div>
+      </form>
     </div>
     </div>
     
@@ -143,15 +231,10 @@ function myFunction() {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.js"></script>
 
-<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/search.min.js"></script>
        
        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/search.js"></script>
--->
-     
        
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 
@@ -175,9 +258,7 @@ function myFunction() {
        
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/dropdown.min.js  '></script> 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-       
-       
+
     <script  src="js/index.js"></script>
     </footer>
 
