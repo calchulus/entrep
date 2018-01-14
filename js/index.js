@@ -1,4 +1,46 @@
-var newList = [];
+
+
+//const algoliasearch = require('algoliasearch');
+//const dotenv = require('dotenv');
+//const firebase = require('firebase');
+//
+//// load values from the .env file in this directory into process.env
+//dotenv.load();
+//
+//// configure algolia
+//const algolia = algoliasearch(
+//  process.env.ALGOLIA_APP_ID,
+//  process.env.ALGOLIA_API_KEY
+//);
+//const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
+//
+
+//// Get all contacts from Firebase
+//database.ref('/contacts').once('value', contacts => {
+//  // Build an array of all records to push to Algolia
+//  const records = [];
+//  contacts.forEach(contact => {
+//    // get the key and data from the snapshot
+//    const childKey = contact.key;
+//    const childData = contact.val();
+//    // We set the Algolia objectID as the Firebase .key
+//    childData.objectID = childKey;
+//    // Add object for indexing
+//    records.push(childData);
+//  });
+//
+//  // Add or update new objects
+//  index
+//    .saveObjects(records)
+//    .then(() => {
+//      console.log('Contacts imported into Algolia');
+//    })
+//    .catch(error => {
+//      console.error('Error when importing contact into Algolia', error);
+//      process.exit(1);
+//    });
+//});
+
 
 // Initialize Firebase
   var config = {
@@ -12,7 +54,7 @@ var newList = [];
 firebase.initializeApp(config);
 
 // New Firebase
-var resourceDB = firebase.database().ref('entrep-resource-tip');
+var resourceDB = firebase.database().ref('resource-tip');
 var resourceRef = resourceDB.orderByChild('tip');//limit to last
 
 // orderByChild('tip')
@@ -24,11 +66,8 @@ var resourceRef = resourceDB.orderByChild('tip');//limit to last
 //  console.log(snapshot.key);
 //});
 
-
 // Form as a JSON
 $(document).ready(function() {
-  
-  
   
    // Check for change & list Items
 resourceRef.once("value")
@@ -37,23 +76,35 @@ resourceRef.once("value")
       // Get the Key & Child Data
     var key = childSnapshot.key;
     var tipsArray = childSnapshot.val();
-      
+      var $container = $('#container');
       for (var prop in tipsArray){
         var str = '';
         var tipTime = moment.utc(tipsArray.tiptime).local().startOf('hour').fromNow();
         
-              str += '<div class="ui card"> <div class="content">' +
+              str += '<li style="padding-bottom: 14px"><div class="ui card"> <div class="content">' +
     '<a style="text-decoration: none;" href=' + tipsArray.url +
-    '><div class="header" style="font-weight: bold; font-size: 1.28571429em; margin-top: -0.21425em; line-height: 1.28571429em; color: rgba(0, 0, 0, 0.85) !important" >' +
-      tipsArray.tip + '  <div style="font-size: 0.6em;" class="ui blue  basic label">' + tipsArray.category + '</div> </div> <div class="meta"> <p>' + tipsArray.description + '</p></div></a></div></div>';        
+    '><div class="header" style="font-weight: bold; font-size: 1.28571429em; margin-top: -0.21Z425em; line-height: 1.28571429em; color: rgba(0, 0, 0, 0.85) !important" >' +
+      tipsArray.tip + ' </div> <p style="font-size: 0.6em;" class="uiZ blue  basic label">' + tipsArray.category + '</p>  <div class="meta"> <p class="description">' + tipsArray.description + '</p></div></a></div></div></li>';  
+//    
+//              str.attr('link': tipsArray.url, 'title': tipsArray.tip, 'category': tipsArray.url, 'description': tipsArray.description);
         }
- 
+    
       // Create the list in HTML
-      $('.resourceTipsList').append(str);
+      $('.list').append(str);
     });
   });
-
-  
+//var codepenList = new List('test-list', { 
+//  valueNames: ['name', 'attr']
+//});
+//    
+    
+      var aList = new List('origlist', { 
+  valueNames: ['name', 'attr']
+});
+  var monkeyList = new List('mylist', { 
+  valueNames: ['content', 'header', 'label', 'description']
+});
+    
   // Add a New Item
   $("#resourceformTip").submit(function(event) {
       event.preventDefault();
@@ -73,6 +124,8 @@ resourceRef.once("value")
   });
 });
 
+
+
 //$('.ui.dropdown').dropdown({
 //  allowAdditions: true,
 //}); 
@@ -85,3 +138,27 @@ resourceRef.once("value")
 //  console.log(snapshot.key);
 //});
 //});
+
+//$.expr[':'].info = function(a,i,m){  
+//  return (a.getAttribute('data-icon')
+//};
+
+$('.ui.dropdown')
+  .dropdown()
+;
+
+
+var $search = $('#search');
+$search.on('keyup', function () {
+  var filter = $(this).val();  
+  if (filter) {
+    var $matches = $($container).find('li:icon(' + filter + ')');    
+    $('ul', $container).not($matches).hide();
+    $matches.show();    
+  }
+  else {
+    $('li', $container).show();
+  }  
+  
+  return false;
+});
